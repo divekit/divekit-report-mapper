@@ -1,0 +1,65 @@
+import fs from 'fs-extra'
+import parser from 'xml2json'
+import {SuiteCollection} from "../model/SuiteCollection";
+import {ReportMapper} from "./interface/ReportMapper";
+import {STATUS, SUITE_TYPE} from "../const/constants";
+
+export class SurefireReportMapperImpl implements ReportMapper {
+    suites: SuiteCollection = new SuiteCollection();
+    input: string[] = [];
+
+    read(filePaths: string[]): void {
+        filePaths.forEach(filePath => {
+            this.input.push(fs.readFileSync(filePath, 'utf8'));
+        });
+    }
+
+    getXml(): string {
+        return parser.toXml(JSON.stringify(this.suites));
+    }
+
+    mapToUnified(): void {
+        this.input.forEach(file => {
+            let json = JSON.parse(parser.toJson(file));
+            let testsuite = json.testsuite;
+
+            if(json.testsuite) {
+                testsuite.type = SUITE_TYPE.JUNIT;
+                delete testsuite.properties;
+
+                const nameSplit = testsuite.name.split('.');
+                testsuite.name = nameSplit[nameSplit.length-1];
+
+                if(!testsuite.testcase.length) {
+                    testsuite.testcase = [testsuite.testcase];
+                }
+
+                testsuite.status = parseInt(testsuite.failures) || parseInt(testsuite.errors) > 0 ? STATUS.FAILED : STATUS.PASSED
+                testsuite.tests = undefined;
+                testsuite.skipped = undefined;
+                testsuite.errors = undefined;
+                testsuite.time = undefined;
+
+                testsuite.testcase.map((testcase: any) => {
+                    testcase.status = testcase.failure || testcase.error ? STATUS.FAILED : STATUS.PASSED;
+                    testcase.hidden = testcase.name.toLowerCase().includes('hidden');
+                    testcase.classname = undefined;
+                    testcase.time = undefined;
+                });
+
+                testsuite.testcase.forEach((testcase: any) => {
+                    if(testcase.error) {
+                        if(!testcase.error.length) {
+                            testcase.error = [testcase.error];
+                        }
+
+                        testcase.error.forEach((error: any) => {
+                            error.message = encodeURI(error.message);
+                        });
+                    }
+                });
+                this.suites.testsuite.push(testsuite);
+            }
+        });
+    }
+}
