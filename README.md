@@ -6,4 +6,4 @@
 
 * Achtung: Nach Änderungen an Typescript-Source Dateien im `src`-Ordner nicht vergessen wieder `npx tsc` auszuführen.
 
-* Mit `node build/bin/report-mapper` lässt sich der Mapper lokal ausführen. Surefire-Reports können unter `target/surefire-reports/` abgelegt werden. Die von statischen Sourcecode Analysetools generierten XML-Reports können direkt unter `target/` abgelegt werden.
+* Mit `node build/bin/report-mapper` lässt sich der Mapper lokal ausführen. Es wird die Datei `unified.xml` generiert und im `target`-Ordner abgelegt. Surefire-Reports können unter `target/surefire-reports/` abgelegt werden. Die von statischen Sourcecode Analysetools generierten XML-Reports können direkt unter `target/` abgelegt werden.
