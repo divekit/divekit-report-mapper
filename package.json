@@ -1,6 +1,6 @@
 {
   "name": "@pschm/report-mapper",
-  "version": "1.0.6",
+  "version": "1.0.61-beta.1",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "prepublish": "tsc",
