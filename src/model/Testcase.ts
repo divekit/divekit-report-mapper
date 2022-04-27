@@ -17,4 +17,12 @@ export class Testcase {
         this.error = [];
         this.failure = [];
     }
+
+    transformErrorsToUnspecifiedObjects() {
+        const transformedErrors : Error[] = []
+        this.error.forEach(err => {
+            transformedErrors.push(Error.transformToUnspecifiedObject(err))
+        });
+        this.error = transformedErrors
+    }
 }

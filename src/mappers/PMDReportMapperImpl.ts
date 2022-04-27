@@ -12,7 +12,7 @@ import parser from "xml2json";
 import {Error} from "../model/Error";
 var xmlescape = require('xml-escape');
 
-export class PMDReportMapperImpl implements ReportMapper{
+export class PMDReportMapperImpl implements ReportMapper {
     suites: SuiteCollection;
     input: any[];
 
@@ -49,6 +49,7 @@ export class PMDReportMapperImpl implements ReportMapper{
                 let testcase = this.genTestCase(principle, pmd);
 
                 testcase.status === STATUS.FAILED ? testsuite.status = STATUS.FAILED : '';
+                testcase.transformErrorsToUnspecifiedObjects()
                 testsuite.testcase.push(testcase);
             }
         }
