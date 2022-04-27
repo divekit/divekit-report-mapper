@@ -23,14 +23,14 @@ export class SurefireReportMapperImpl implements ReportMapper {
             let json = JSON.parse(parser.toJson(file));
             let testsuite = json.testsuite;
 
-            if(json.testsuite) {
+            if (json.testsuite) {
                 testsuite.type = SUITE_TYPE.JUNIT;
                 delete testsuite.properties;
 
                 const nameSplit = testsuite.name.split('.');
-                testsuite.name = nameSplit[nameSplit.length-1];
+                testsuite.name = nameSplit[nameSplit.length - 1];
 
-                if(!testsuite.testcase.length) {
+                if (!testsuite.testcase.length) {
                     testsuite.testcase = [testsuite.testcase];
                 }
 
@@ -48,18 +48,34 @@ export class SurefireReportMapperImpl implements ReportMapper {
                 });
 
                 testsuite.testcase.forEach((testcase: any) => {
-                    if(testcase.error) {
-                        if(!testcase.error.length) {
+                    if (testcase.error) {
+                        if (!testcase.error.length) {
                             testcase.error = [testcase.error];
                         }
 
                         testcase.error.forEach((error: any) => {
                             error.message = encodeURI(error.message);
+                            error.$t = this.wrapWithCDataTag(error.$t);
                         });
                     }
+                    if (testcase.failure) {
+                        if (!testcase.failure.length) {
+                            testcase.failure = [testcase.failure];
+                        }
+
+                        testcase.failure.forEach((failure: any) => {
+                            failure.message = encodeURI(failure.message);
+                            failure.$t = this.wrapWithCDataTag(failure.$t);
+                        });
+                    }
+                    delete testcase['system-out'] // delete complete stack trace
                 });
                 this.suites.testsuite.push(testsuite);
             }
         });
+    }
+
+    wrapWithCDataTag(text: string): string {
+        return "<![CDATA[" + text + "]]>"
     }
 }
