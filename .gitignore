@@ -1,3 +1,8 @@
+target/
+debug/
+public/
+
+
 *.iml
 .idea/
 package-lock.json
