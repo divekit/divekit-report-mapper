@@ -1,6 +1,6 @@
 {
-  "name": "@archi-lab/report-mapper",
-  "version": "1.0.5",
+  "name": "@pschm/report-mapper",
+  "version": "1.0.6",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "prepublish": "tsc",
@@ -14,19 +14,21 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "ArchiLab",
+  "author": "pschm",
   "license": "MIT",
-  "description": "A mapper which can be used to map different test report result-formats into a unified xml format.",
+  "description": "Altered version of @archi-lab/report-mapper",
   "devDependencies": {
     "@types/fs-extra": "^9.0.12",
     "@types/glob": "^7.1.4",
     "@types/node": "^16.6.0",
     "@types/xml2json": "^0.11.4",
-    "typescript": "^4.3.5"
+    "typescript": "^4.6.3"
   },
   "dependencies": {
     "fs-extra": "^10.0.0",
     "glob": "^7.1.7",
+    "node": "^17.7.2",
+    "tsc": "^2.0.4",
     "xml-escape": "^1.1.0",
     "xml2json": "^0.12.0"
   }
