@@ -1,6 +1,6 @@
 {
   "name": "@divekit/report-mapper",
-  "version": "1.0.7",
+  "version": "1.0.8-beta.1",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "prepublish": "tsc",
