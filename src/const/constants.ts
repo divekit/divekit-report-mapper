@@ -1,3 +1,7 @@
+export const SUREFIRE_FLAG = 'surefire'
+export const CHECKSTYLE_FLAG = 'checkstyle'
+export const PMD_FLAG = 'pmd'
+
 export const STATUS = {
     FAILED: 'failed',
     PASSED: 'passed'
