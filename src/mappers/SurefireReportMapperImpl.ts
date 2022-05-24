@@ -8,6 +8,10 @@ export class SurefireReportMapperImpl implements ReportMapper {
     suites: SuiteCollection = new SuiteCollection();
     input: string[] = [];
 
+    name(): string {
+        return 'Surefire'
+    }
+
     read(filePaths: string[]): void {
         filePaths.forEach(filePath => {
             this.input.push(fs.readFileSync(filePath, 'utf8'));

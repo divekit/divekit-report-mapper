@@ -21,6 +21,10 @@ export class PMDReportMapperImpl implements ReportMapper {
         this.input = [];
     }
 
+    name(): string {
+        return 'PMD'
+    }
+
     read(filePaths: string[]): void {
         filePaths.forEach(filePath => {
             this.input.push(fs.readFileSync(filePath, 'utf8'));

@@ -20,6 +20,10 @@ export class CheckstyleReportMapperImpl implements ReportMapper {
         this.input = [];
     }
 
+    name(): string {
+        return 'Checkstyle'
+    }
+
     read(filePaths: string[]): void {
         filePaths.forEach(filePath => {
             this.input.push(fs.readFileSync(filePath, 'utf8'));
