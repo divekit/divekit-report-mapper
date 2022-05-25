@@ -18,7 +18,7 @@
 
 ## Changelog
 
-### 1.0.8-beta
+### 1.0.8
 
 - Parameter Verarbeitung hinzugefügt, welche eine Einschränkung der genutzten Mapper ermöglichen
 - Error handling: Liefert ein Mapper kein valides Ergebnis wird ein Fehler in der unified.xml mit angegeben 

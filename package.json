@@ -1,6 +1,6 @@
 {
   "name": "@divekit/report-mapper",
-  "version": "1.0.8-beta.1",
+  "version": "1.0.8",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "prepublish": "tsc",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "npx tsc && node build/bin/report-mapper",
-    "dev++": "echo \"Compile Report-Mapper\" && npx tsc && echo \"Run Report-Mapper\" && node build/bin/report-mapper && echo \"Build Test-Page\" && node ../divekit-new-test-page-generator/bin/generate-report"
+    "dev++": "echo \"Compile Report-Mapper\" && npx tsc && echo \"Run Report-Mapper\" && node build/bin/report-mapper && echo \"Build Test-Page\" && node ../divekit-new-test-page-generator/bin/generate-report --reports target/unified.xml"
   },
   "keywords": [],
   "author": "divekit",
