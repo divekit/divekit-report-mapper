@@ -12,7 +12,8 @@
   },
   "scripts": {
     "dev": "npx tsc && node build/bin/report-mapper",
-    "dev++": "echo \"Compile Report-Mapper\" && npx tsc && echo \"Run Report-Mapper\" && node build/bin/report-mapper && echo \"Build Test-Page\" && node ../divekit-report-visualizer/bin/report-visualizer --reports target/unified.xml"
+    "dev++": "echo \"Compile Report-Mapper\" && npx tsc && echo \"Run Report-Mapper\" && node build/bin/report-mapper && echo \"Build Test-Page\" && node ../divekit-report-visualizer/bin/report-visualizer --reports target/unified.xml",
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'"
   },
   "keywords": [],
   "author": "divekit",
@@ -20,10 +21,15 @@
   "description": "A mapper which can be used to map different test report result-formats into a unified xml format.",
   "homepage": "https://github.com/divekit/divekit-report-mapper#readme",
   "devDependencies": {
+    "@types/chai": "^4.3.1",
     "@types/fs-extra": "^9.0.12",
     "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.1.1",
     "@types/node": "^16.6.0",
     "@types/xml2json": "^0.11.4",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "ts-node": "^10.8.1",
     "tslint": "^6.1.3",
     "typescript": "^4.6.3"
   },
