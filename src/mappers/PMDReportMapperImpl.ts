@@ -1,15 +1,12 @@
-import {ReportMapper} from "./interface/ReportMapper";
-import {SuiteCollection} from "../model/SuiteCollection";
-import fs from "fs-extra";
-import {Testsuite} from "../model/Testsuite";
-import {
-    CLEAN_CODE_PRINCIPLES_PMD_RULES,
-    CleanCodePrinciples,
-    STATUS, SUITE_TYPE
-} from "../const/constants";
-import {Testcase} from "../model/Testcase";
-import parser from "xml2json";
-import {Error} from "../model/Error";
+import {ReportMapper} from './interface/ReportMapper'
+import {SuiteCollection} from '../model/SuiteCollection'
+import fs from 'fs-extra'
+import {Testsuite} from '../model/Testsuite'
+import {CLEAN_CODE_PRINCIPLES, CLEAN_CODE_PRINCIPLES_PMD_RULES, STATUS, SUITE_TYPE} from '../const/constants'
+import {Testcase} from '../model/Testcase'
+import parser from 'xml2json'
+import {Error} from '../model/Error'
+
 var xmlescape = require('xml-escape');
 
 export class PMDReportMapperImpl implements ReportMapper {
@@ -49,7 +46,7 @@ export class PMDReportMapperImpl implements ReportMapper {
             testsuite.testcase.push(this.handleParsingError(testsuite, pmd.error));
             testsuite.status = STATUS.FAILED;
         } else {
-            for (let principle of CleanCodePrinciples) {
+            for (let principle of CLEAN_CODE_PRINCIPLES) {
                 let testcase = this.genTestCase(principle, pmd);
 
                 testcase.status === STATUS.FAILED ? testsuite.status = STATUS.FAILED : '';

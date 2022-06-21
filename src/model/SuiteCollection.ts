@@ -1,9 +1,9 @@
-import {Testsuite} from "./Testsuite";
+import {Testsuite} from './Testsuite'
 
 export class SuiteCollection {
-    testsuite: Testsuite[];
+    testsuite: Testsuite[]
 
     constructor() {
-        this.testsuite = [];
+        this.testsuite = []
     }
 }

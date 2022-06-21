@@ -1,10 +1,12 @@
-import {SurefireReportMapperImpl} from "./mappers/SurefireReportMapperImpl";
-import * as fs from "fs";
-import {CheckstyleReportMapperImpl} from "./mappers/CheckstyleReportMapperImpl";
-import {PMDReportMapperImpl} from "./mappers/PMDReportMapperImpl";
-import {CHECKSTYLE_FLAG, PMD_FLAG, SUREFIRE_FLAG} from "./const/constants";
-import {MapperResult} from "./model/MapperResult";
-import {getMapperResult} from "./mappers/interface/ReportMapper";
+import {SurefireReportMapperImpl} from './mappers/SurefireReportMapperImpl'
+import * as fs from 'fs'
+import {CheckstyleReportMapperImpl} from './mappers/CheckstyleReportMapperImpl'
+import {PMDReportMapperImpl} from './mappers/PMDReportMapperImpl'
+import {MapperResult} from './model/MapperResult'
+import {getMapperResult} from './mappers/interface/ReportMapper'
+import {SUREFIRE_FLAG} from './const/SurefireConstants'
+import {PMD_FLAG} from './const/PmdConstants'
+import {CHECKSTYLE_FLAG} from './const/CheckstyleConstants'
 
 
 export async function mapToUnifiedXml() {
@@ -21,11 +23,11 @@ export async function mapToUnifiedXml() {
     if (args.includes(PMD_FLAG))
         results.push(await getMapperResult(new PMDReportMapperImpl(), 'target/pmd.xml'))
 
-    let xml: string = ''
-    xml += '<?xml version="1.0" encoding="UTF-8"?>\n';
+    let xml = ''
+    xml += '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<suites>\n\n'
     xml += MapperResult.mergeResultsToXml(results)
-    xml += '</suites>';
+    xml += '</suites>'
 
-    fs.writeFileSync('target/unified.xml', xml);
+    fs.writeFileSync('target/unified.xml', xml)
 }

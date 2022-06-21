@@ -1,13 +1,13 @@
 export class Error {
-    type: string | undefined;
-    location: string | undefined;
-    file: string | undefined;
-    message: string;
-    $t: string; // XML Body, includes message and more 
+    type: string | undefined
+    location: string | undefined
+    file: string | undefined
+    message: string
+    $t: string // XML Body, includes message and more
 
     constructor() {
-        this.message = '';
-        this.$t = '';
+        this.message = ''
+        this.$t = ''
     }
 
     /**
