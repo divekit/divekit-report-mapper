@@ -31,9 +31,16 @@ export class PMDReportMapperImpl implements ReportMapper {
 
     mapToUnified(): void {
         this.input.forEach(file => {
-            const json = JSON.parse(parser.toJson(file))
-            const pmd = json.pmd
+            let pmd
+            try {
+                const json = JSON.parse(parser.toJson(file))
+                pmd = json.pmd
+            } catch (e) {
+                console.log('Error while parsing pmd.xml: ' + e)
+                return
+            }
 
+            if (!pmd) return
             this.suites.testsuite.push(this.genCleanCodeSuite(pmd))
         })
     }
