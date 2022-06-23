@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.37.0" timestamp="2022-04-08T16:38:53.566">
+<file name="C:\work\gitlab-repos\ST2MS0_tests_group_d5535b06-ae29-4668-8ad9-bd23b4cc5218\src\main\java\thkoeln\st\st2praktikum\bad_stuff\Robot.java">
+<violation beginline="90" endline="90" begincolumn="13" endcolumn="22" rule="LocalVariableNamingConventions" ruleset="Code Style" package="thkoeln.st.st2praktikum.bad_stuff" class="Robot" method="Robot" variable="snake_case" externalInfoUrl="https://pmd.github.io/pmd-6.37.0/pmd_rules_java_codestyle.html#localvariablenamingconventions" priority="1">
+The local variable name 'snake_case' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+<!--<violation beginline="101" endline="103" begincolumn="12" endcolumn="5" rule="LinguisticNaming" ruleset="Code Style" package="thkoeln.st.st2praktikum.bad_stuff" class="Robot" method="setId" externalInfoUrl="https://pmd.github.io/pmd-6.37.0/pmd_rules_java_codestyle.html#linguisticnaming" priority="3">-->
+<!--Linguistics Antipattern - The setter 'setId' should not return any type except void linguistically-->
+<!--</violation>-->
+</file>
+</pmd>
