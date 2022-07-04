@@ -1,3 +1,5 @@
+import {logger} from '../config/Logger'
+
 export class MapperResult {
     source: string
     valid: boolean
@@ -12,7 +14,10 @@ export class MapperResult {
     public static mergeResultsToXml(results: MapperResult[]): string {
         let xml = ''
 
+        logger.debug('Found ' + results.length + ' Mapper result/s')
+
         results.forEach(it => {
+            logger.debug('merge ' + it.source)
             if (it.xml) xml += it.xml
             if (!it.valid) xml += `<testsuiteError>${it.source}</testsuiteError>`
             xml += '\n\n'
