@@ -7,7 +7,7 @@ import parser from 'xml2json'
 import {Testcase} from '../../main/model/Testcase'
 
 describe('PMD Report Mapper Tests', () => {
-    it('with valid input (only PMD)', async () => {
+    it('with valid input', async () => {
         const result = await getMapperResult(new PMDReportMapperImpl(),  RESOURCE_PATH + 'pmd-valid.xml')
 
         expect(result).to.be.an('object')
