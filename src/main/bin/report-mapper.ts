@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../../../build').mapToUnifiedXml()
+require('../../../build/main').main()

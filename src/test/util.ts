@@ -1,3 +1,6 @@
+import fs from 'fs-extra'
+import parser from 'xml2json'
+
 export const RESOURCE_PATH = 'src/test/resources/'
 
 export function wrapWithUnifiedXml(xml: string): string {
@@ -7,4 +10,9 @@ export function wrapWithUnifiedXml(xml: string): string {
         xml +
         '\n' +
         '</suites>'
+}
+
+export function getJsonFromXmlFile(path: string): any {
+    const fileContent = fs.readFileSync(path, 'utf8')
+    return JSON.parse(parser.toJson(fileContent))
 }

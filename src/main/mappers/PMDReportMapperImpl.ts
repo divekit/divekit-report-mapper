@@ -7,6 +7,7 @@ import parser from 'xml2json'
 import {Error} from '../model/Error'
 import {CLEAN_CODE_PRINCIPLES, STATUS, SUITE_TYPE} from '../const/CoreConstants'
 import {CLEAN_CODE_PRINCIPLES_PMD_RULES} from '../const/PmdConstants'
+import {logger} from '../config/Logger'
 
 const xmlEscape = require('xml-escape')
 
@@ -24,6 +25,7 @@ export class PMDReportMapperImpl implements ReportMapper {
     }
 
     read(filePaths: string[]): void {
+        logger.debug('parsing PMD inputs. File count: ' + filePaths.length)
         filePaths.forEach(filePath => {
             this.input.push(fs.readFileSync(filePath, 'utf8'))
         })
@@ -40,7 +42,11 @@ export class PMDReportMapperImpl implements ReportMapper {
                 return
             }
 
-            if (!pmd) return
+            if (!pmd) {
+                logger.warn('could not parse pmd-file. PMD not valid.')
+                return
+            }
+
             this.suites.testsuite.push(this.genCleanCodeSuite(pmd))
         })
     }
@@ -59,6 +65,7 @@ export class PMDReportMapperImpl implements ReportMapper {
 
                 // tslint:disable-next-line:no-unused-expression
                 testcase.status === STATUS.FAILED ? testsuite.status = STATUS.FAILED : ''
+                // testsuite.status = testcase.status === STATUS.FAILED ? STATUS.FAILED : ''
                 testcase.transformErrorsToUnspecifiedObjects()
                 testsuite.testcase.push(testcase)
             }

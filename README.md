@@ -13,9 +13,6 @@
 
 * Für die Entwicklung können `npx tsc` und `node build/bin/report-mapper` mithilfe von `npm run dev` kombiniert werden.
 
-* `npm run dev++` baut zusätzlich die Testseite, welche dann im Ordner `public` aufgerufen werden kann. Voraussetzung
-  dabei ist das der `divekit-report-visualizer` im selben Ordner wie der `divekit-report-mapper` liegt.
-
 ## Changelog
 
 ### 1.0.9-beta.1
