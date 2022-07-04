@@ -27,7 +27,8 @@ describe('Integration Tests', () => {
         const suites: Testsuite[] = result.suites.testsuite
         const suiteNames = suites.map(suite => suite.name)
         // should contain: E1BasicTests, E1BasicTests, E2CleanCodeSolidManualTest, Clean-Code-Principles by PMD
-        expect(suiteNames.includes('E1BasicTests'), 'should contain E1BasicTests testsuite').to.be.true // exists 2-times
+        expect(suiteNames.includes('E1BasicTests'), 'should contain E1BasicTests testsuite').to.be.true
+        expect(suiteNames.includes('E1AdvancedTests'), 'should contain E1AdvancedTests testsuite').to.be.true
         expect(suiteNames.includes('E2CleanCodeSolidManualTest'), 'should contain E2CleanCodeSolidManualTest testsuite').to.be.true
         expect(suiteNames.includes('Clean-Code-Principles by PMD'), 'should contain Clean-Code-Principles by PMD testsuite').to.be.true
     })
@@ -99,8 +100,6 @@ describe('Integration Tests', () => {
         expect(errors.includes('PMD'), 'should contain pmd error').to.be.true
         expect(errors.includes('Surefire'), 'should contain surefire error').to.be.true
     })
-
-
 })
 
 

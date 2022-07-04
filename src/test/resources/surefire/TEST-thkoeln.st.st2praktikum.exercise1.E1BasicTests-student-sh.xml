@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:noNamespaceSchemaLocation=""
-           name="thkoeln.st.st2praktikum.exercise1.E1BasicTests" time="1.771" tests="4" errors="4" skipped="0"
+           name="thkoeln.st.st2praktikum.exercise1.E1AdvancedTests" time="1.771" tests="4" errors="4" skipped="0"
            failures="0">
     <properties>
         <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
