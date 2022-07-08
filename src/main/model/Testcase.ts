@@ -10,8 +10,8 @@ export class Testcase {
     type: string | undefined
     'system-out': string | undefined
 
-    constructor() {
-        this.name = ''
+    constructor(name: string = '') {
+        this.name = name
         this.status = 'passed'
         this.hidden = false
         this.error = []
