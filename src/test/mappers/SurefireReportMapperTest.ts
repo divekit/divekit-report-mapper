@@ -1,7 +1,7 @@
 /* tslint:disable */
 import {wrapWithUnifiedXml} from '../util'
 import {expect} from 'chai'
-import {SurefireReportMapperImpl} from '../../main/mappers/SurefireReportMapperImpl'
+import {SurefireReportMapper} from '../../main/mappers/SurefireReportMapper'
 import {MapperResult} from '../../main/model/MapperResult'
 import parser from 'xml2json'
 import {Testsuite} from '../../main/model/Testsuite'
@@ -20,7 +20,7 @@ describe('Surefire Report Mapper Tests', () => {
     const mapperService = new MapperService()
 
     it('with valid input', async () => {
-        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), TestFiles.ALL_SUREFIRE_INPUTS)
+        const result = await mapperService.getMapperResult(new SurefireReportMapper(), TestFiles.ALL_SUREFIRE_INPUTS)
 
         // validate MapperResult
         expect(result).to.be.an('object')
@@ -75,17 +75,17 @@ describe('Surefire Report Mapper Tests', () => {
 
 
     it('with invalid input (file does not exist)', async () => {
-        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), TestFiles.INVALID_PATH)
+        const result = await mapperService.getMapperResult(new SurefireReportMapper(), TestFiles.INVALID_PATH)
         expectInValidSurefireMapperResult(result)
     })
 
     it('with invalid input (empty file)', async () => {
-        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), TestFiles.EMPTY_XML)
+        const result = await mapperService.getMapperResult(new SurefireReportMapper(), TestFiles.EMPTY_XML)
         expectInValidSurefireMapperResult(result)
     })
 
     it('with invalid input (corrupt xml)', async () => {
-        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), TestFiles.INVALID_XML)
+        const result = await mapperService.getMapperResult(new SurefireReportMapper(), TestFiles.INVALID_XML)
         expectInValidSurefireMapperResult(result)
     })
 })

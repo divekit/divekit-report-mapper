@@ -2,11 +2,11 @@ import {FilePaths, ProdFilePaths} from '../config/FilePaths'
 import {MapperResult} from '../model/MapperResult'
 import {SUREFIRE_FLAG} from '../const/SurefireConstants'
 import {ReportMapper} from './interface/ReportMapper'
-import {SurefireReportMapperImpl} from './SurefireReportMapperImpl'
+import {SurefireReportMapper} from './SurefireReportMapper'
 import {CHECKSTYLE_FLAG} from '../const/CheckstyleConstants'
-import {CheckstyleReportMapperImpl} from './CheckstyleReportMapperImpl'
+import {CheckstyleReportMapper} from './CheckstyleReportMapper'
 import {PMD_FLAG} from '../const/PMDConstants'
-import {PMDReportMapperImpl} from './PMDReportMapperImpl'
+import {PMDReportMapper} from './PMDReportMapper'
 import globModule from 'glob'
 import util from 'util'
 
@@ -20,11 +20,11 @@ export class MapperService {
         const results: MapperResult[] = []
 
         if (componentFlags.includes(SUREFIRE_FLAG))
-            results.push(await this.getMapperResult(new SurefireReportMapperImpl(), filePaths.surefire()))
+            results.push(await this.getMapperResult(new SurefireReportMapper(), filePaths.surefire()))
         if (componentFlags.includes(CHECKSTYLE_FLAG))
-            results.push(await this.getMapperResult(new CheckstyleReportMapperImpl(), filePaths.checkstyle()))
+            results.push(await this.getMapperResult(new CheckstyleReportMapper(), filePaths.checkstyle()))
         if (componentFlags.includes(PMD_FLAG))
-            results.push(await this.getMapperResult(new PMDReportMapperImpl(), filePaths.pmd()))
+            results.push(await this.getMapperResult(new PMDReportMapper(), filePaths.pmd()))
 
         let xml = ''
         xml += '<?xml version="1.0" encoding="UTF-8"?>\n'

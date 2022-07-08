@@ -12,7 +12,7 @@ import {ensureArray} from '../util'
 
 const xmlEscape = require('xml-escape')
 
-export class PMDReportMapperImpl implements ReportMapper {
+export class PMDReportMapper implements ReportMapper {
     suites: SuiteCollection
     input: any[]
 
@@ -83,7 +83,7 @@ export class PMDReportMapperImpl implements ReportMapper {
             return testsuite
         }
 
-        for (const principle of PMDReportMapperImpl.filteredPrinciples()) {
+        for (const principle of PMDReportMapper.filteredPrinciples()) {
             const testcase = this.generateTestcase(principle, pmdResults)
 
             if (testcase.status === STATUS.FAILED) testsuite.status = STATUS.FAILED
@@ -119,7 +119,7 @@ export class PMDReportMapperImpl implements ReportMapper {
         const errors: Error[] = []
         list.forEach((violation: any) => {
             const rule = violation.rule // in format e.g. "LongVariable"
-            const pmdPrinciples = PMDReportMapperImpl.filteredPMDPrinciples()[principle]
+            const pmdPrinciples = PMDReportMapper.filteredPMDPrinciples()[principle]
 
             if (pmdPrinciples && pmdPrinciples.includes(rule)) {
                 errors.push(this.createError(violation, rule, fileName))

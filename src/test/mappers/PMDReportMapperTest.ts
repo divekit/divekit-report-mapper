@@ -1,6 +1,6 @@
 /* tslint:disable */
 import {expect} from 'chai'
-import {PMDReportMapperImpl} from '../../main/mappers/PMDReportMapperImpl'
+import {PMDReportMapper} from '../../main/mappers/PMDReportMapper'
 import parser from 'xml2json'
 import {Testcase} from '../../main/model/Testcase'
 import {TestFiles} from '../config/TestFilePaths'
@@ -19,7 +19,7 @@ describe('PMD Report Mapper Tests', () => {
     const mapperService = new MapperService()
 
     it('with valid input', async () => {
-        const result = await mapperService.getMapperResult(new PMDReportMapperImpl(), TestFiles.VALID_PMD)
+        const result = await mapperService.getMapperResult(new PMDReportMapper(), TestFiles.VALID_PMD)
 
         expect(result).to.be.an('object')
         expect(result.valid).to.be.true
@@ -49,17 +49,17 @@ describe('PMD Report Mapper Tests', () => {
     })
 
     it('with invalid input (file does not exist)', async () => {
-        const result = await mapperService.getMapperResult(new PMDReportMapperImpl(), TestFiles.INVALID_PATH)
+        const result = await mapperService.getMapperResult(new PMDReportMapper(), TestFiles.INVALID_PATH)
         expectPMDError(result)
     })
 
     it('with invalid input (empty file)', async () => {
-        const result = await mapperService.getMapperResult(new PMDReportMapperImpl(), TestFiles.EMPTY_XML)
+        const result = await mapperService.getMapperResult(new PMDReportMapper(), TestFiles.EMPTY_XML)
         expectPMDError(result)
     })
 
     it('with invalid input (corrupt xml)', async () => {
-        const result = await mapperService.getMapperResult(new PMDReportMapperImpl(), TestFiles.INVALID_XML)
+        const result = await mapperService.getMapperResult(new PMDReportMapper(), TestFiles.INVALID_XML)
         expectPMDError(result)
     })
 })

@@ -5,7 +5,7 @@ import {ReportMapper} from './interface/ReportMapper'
 import {STATUS, SUITE_TYPE} from '../const/CoreConstants'
 import {logger} from '../config/Logger'
 
-export class SurefireReportMapperImpl implements ReportMapper {
+export class SurefireReportMapper implements ReportMapper {
     suites: SuiteCollection = new SuiteCollection()
     input: string[] = []
 

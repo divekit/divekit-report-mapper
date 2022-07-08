@@ -8,7 +8,7 @@ import {Error} from '../model/Error'
 import {CLEAN_CODE_PRINCIPLES, STATUS, SUITE_TYPE} from '../const/CoreConstants'
 import {CLEAN_CODE_PRINCIPLES_CHECKSTYLE_CHECKS} from '../const/CheckstyleConstants'
 
-export class CheckstyleReportMapperImpl implements ReportMapper {
+export class CheckstyleReportMapper implements ReportMapper {
     suites: SuiteCollection
     input: string[]
 
