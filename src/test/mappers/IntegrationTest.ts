@@ -6,7 +6,6 @@ import {PMD_FLAG} from '../../main/const/PMDConstants'
 import parser from 'xml2json'
 import {Testsuite} from '../../main/model/Testsuite'
 import fs from 'fs'
-import {RESOURCE_PATH} from '../../../build/test/util'
 import {MapperService} from '../../main/mappers/MapperService'
 
 
@@ -17,7 +16,7 @@ describe('Integration Tests', () => {
     it('surefire+pmd with valid files (complete file)', async () => {
         config.setAllValid()
         const xmlResult = await mapperService.mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
-        const fileContent = fs.readFileSync(RESOURCE_PATH + 'results/unified-valid-surefire-pmd.xml', 'utf8')
+        const fileContent = fs.readFileSync(TestFiles.VALID_SUREFIRE_PMD_RESULT, 'utf8')
 
         expect(xmlResult, 'Blackbox test.').to.be.equal(fileContent)
     })

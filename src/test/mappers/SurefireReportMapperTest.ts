@@ -5,8 +5,8 @@ import {SurefireReportMapperImpl} from '../../main/mappers/SurefireReportMapperI
 import {MapperResult} from '../../main/model/MapperResult'
 import parser from 'xml2json'
 import {Testsuite} from '../../main/model/Testsuite'
-import {RESOURCE_PATH} from '../../../build/test/util'
 import {MapperService} from '../../main/mappers/MapperService'
+import {TestFiles} from '../config/TestFilePaths'
 
 function expectInValidSurefireMapperResult(result: MapperResult) {
     expect(result).to.be.an('object')
@@ -20,7 +20,7 @@ describe('Surefire Report Mapper Tests', () => {
     const mapperService = new MapperService()
 
     it('with valid input', async () => {
-        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'surefire/*.xml')
+        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), TestFiles.ALL_SUREFIRE_INPUTS)
 
         // validate MapperResult
         expect(result).to.be.an('object')
@@ -75,17 +75,17 @@ describe('Surefire Report Mapper Tests', () => {
 
 
     it('with invalid input (file does not exist)', async () => {
-        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'no-valid-name.xml')
+        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), TestFiles.INVALID_PATH)
         expectInValidSurefireMapperResult(result)
     })
 
     it('with invalid input (empty file)', async () => {
-        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'empty.xml')
+        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), TestFiles.EMPTY_XML)
         expectInValidSurefireMapperResult(result)
     })
 
     it('with invalid input (corrupt xml)', async () => {
-        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'invalid.xml')
+        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), TestFiles.INVALID_XML)
         expectInValidSurefireMapperResult(result)
     })
 })
