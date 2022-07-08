@@ -1,11 +1,12 @@
 /* tslint:disable */
 import {getMapperResult} from '../../main/mappers/interface/ReportMapper'
-import {RESOURCE_PATH, wrapWithUnifiedXml} from '../util'
+import {wrapWithUnifiedXml} from '../util'
 import {expect} from 'chai'
 import {SurefireReportMapperImpl} from '../../main/mappers/SurefireReportMapperImpl'
 import {MapperResult} from '../../main/model/MapperResult'
 import parser from 'xml2json'
 import {Testsuite} from '../../main/model/Testsuite'
+import {RESOURCE_PATH} from '../../../build/test/util'
 
 function expectInValidSurefireMapperResult(result: MapperResult) {
     expect(result).to.be.an('object')

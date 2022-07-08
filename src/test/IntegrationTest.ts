@@ -1,17 +1,17 @@
 /* tslint:disable */
 import {expect} from 'chai'
-import {TestFileConfig} from './config/TestFilePaths'
+import {TestFiles} from './config/TestFilePaths'
 import {SUREFIRE_FLAG} from '../main/const/SurefireConstants'
 import {PMD_FLAG} from '../main/const/PMDConstants'
 import {mapToUnifiedXml} from '../main'
 import parser from 'xml2json'
 import {Testsuite} from '../main/model/Testsuite'
 import fs from 'fs'
-import {RESOURCE_PATH} from './util'
+import {RESOURCE_PATH} from '../../build/test/util'
 
 
 describe('Integration Tests', () => {
-    const config = TestFileConfig.getInstance()
+    const config = TestFiles.getInstance()
 
     it('surefire+pmd with valid files (complete file)', async () => {
         config.setAllValid()
@@ -114,7 +114,7 @@ describe('Integration Tests', () => {
 
 
 describe('Component Flags', () => {
-    const config = TestFileConfig.getInstance()
+    const config = TestFiles.getInstance()
 
     it('only PMD', async () => {
         config.setAllValid()

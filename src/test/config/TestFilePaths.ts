@@ -1,8 +1,13 @@
 import {FilePaths} from '../../main/config/FilePaths'
-import {RESOURCE_PATH} from '../util'
 
-export class TestFileConfig implements FilePaths {
-    private static instance: TestFileConfig
+export class TestFiles implements FilePaths {
+    public static readonly RESOURCE_PATH = 'src/test/resources/'
+    public static readonly VALID_PMD = TestFiles.RESOURCE_PATH + 'pmd-valid.xml'
+    public static readonly INVALID_PATH = 'something-that-doesnt-exist.'
+    public static readonly INVALID_XML = TestFiles.RESOURCE_PATH + 'invalid.xml'
+    public static readonly EMPTY_XML = TestFiles.RESOURCE_PATH + 'empty.xml'
+
+    private static instance: TestFiles
 
     private checkstyleFile = ''
     private pmdFile = ''
@@ -11,8 +16,8 @@ export class TestFileConfig implements FilePaths {
     private constructor() {
     }
 
-    public static getInstance(): TestFileConfig {
-        if (!this.instance) TestFileConfig.instance = new TestFileConfig()
+    public static getInstance(): TestFiles {
+        if (!this.instance) TestFiles.instance = new TestFiles()
         return this.instance
     }
 
@@ -30,20 +35,20 @@ export class TestFileConfig implements FilePaths {
 
 
     setCheckstyleFile(fileName: string) {
-        this.checkstyleFile = RESOURCE_PATH + fileName
+        this.checkstyleFile = TestFiles.RESOURCE_PATH + fileName
     }
 
     setPmdFile(fileName: string) {
-        this.pmdFile = RESOURCE_PATH + fileName
+        this.pmdFile = TestFiles.RESOURCE_PATH + fileName
     }
 
     setSurefireFile(fileName: string) {
-        this.surefireFile = RESOURCE_PATH + fileName
+        this.surefireFile = TestFiles.RESOURCE_PATH + fileName
     }
 
     setAllValid(): void {
-        this.pmdFile = RESOURCE_PATH + 'pmd-valid.xml'
-        this.checkstyleFile = RESOURCE_PATH + 'checkstyle.xml'
-        this.surefireFile = RESOURCE_PATH + 'surefire/*.xml'
+        this.pmdFile = TestFiles.RESOURCE_PATH + 'pmd-valid.xml'
+        this.checkstyleFile = TestFiles.RESOURCE_PATH + 'checkstyle.xml'
+        this.surefireFile = TestFiles.RESOURCE_PATH + 'surefire/*.xml'
     }
 }
