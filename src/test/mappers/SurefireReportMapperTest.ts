@@ -1,5 +1,4 @@
 /* tslint:disable */
-import {getMapperResult} from '../../main/mappers/interface/ReportMapper'
 import {wrapWithUnifiedXml} from '../util'
 import {expect} from 'chai'
 import {SurefireReportMapperImpl} from '../../main/mappers/SurefireReportMapperImpl'
@@ -7,6 +6,7 @@ import {MapperResult} from '../../main/model/MapperResult'
 import parser from 'xml2json'
 import {Testsuite} from '../../main/model/Testsuite'
 import {RESOURCE_PATH} from '../../../build/test/util'
+import {MapperService} from '../../main/mappers/MapperService'
 
 function expectInValidSurefireMapperResult(result: MapperResult) {
     expect(result).to.be.an('object')
@@ -17,8 +17,10 @@ function expectInValidSurefireMapperResult(result: MapperResult) {
 }
 
 describe('Surefire Report Mapper Tests', () => {
+    const mapperService = new MapperService()
+
     it('with valid input', async () => {
-        const result = await getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'surefire/*.xml')
+        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'surefire/*.xml')
 
         // validate MapperResult
         expect(result).to.be.an('object')
@@ -73,17 +75,17 @@ describe('Surefire Report Mapper Tests', () => {
 
 
     it('with invalid input (file does not exist)', async () => {
-        const result = await getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'no-valid-name.xml')
+        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'no-valid-name.xml')
         expectInValidSurefireMapperResult(result)
     })
 
     it('with invalid input (empty file)', async () => {
-        const result = await getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'empty.xml')
+        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'empty.xml')
         expectInValidSurefireMapperResult(result)
     })
 
     it('with invalid input (corrupt xml)', async () => {
-        const result = await getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'invalid.xml')
+        const result = await mapperService.getMapperResult(new SurefireReportMapperImpl(), RESOURCE_PATH + 'invalid.xml')
         expectInValidSurefireMapperResult(result)
     })
 })

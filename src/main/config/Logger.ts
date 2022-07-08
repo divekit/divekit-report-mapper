@@ -1,5 +1,5 @@
 import {createLogger, format, transports} from 'winston'
-import * as config from '../../config.json'
+import * as config from './config.json'
 
 export const logger = createLogger({
     transports: [new transports.Console()],

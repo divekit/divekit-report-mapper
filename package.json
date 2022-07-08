@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "npx tsc && node build/main/bin/report-mapper",
-    "test": "mocha -r ts-node/register src/test/*.ts"
+    "test": "mocha -r ts-node/register src/test/*/*.ts"
   },
   "keywords": [],
   "author": "divekit",

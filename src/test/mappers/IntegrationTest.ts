@@ -1,21 +1,22 @@
 /* tslint:disable */
 import {expect} from 'chai'
-import {TestFiles} from './config/TestFilePaths'
-import {SUREFIRE_FLAG} from '../main/const/SurefireConstants'
-import {PMD_FLAG} from '../main/const/PMDConstants'
-import {mapToUnifiedXml} from '../main'
+import {TestFiles} from '../config/TestFilePaths'
+import {SUREFIRE_FLAG} from '../../main/const/SurefireConstants'
+import {PMD_FLAG} from '../../main/const/PMDConstants'
 import parser from 'xml2json'
-import {Testsuite} from '../main/model/Testsuite'
+import {Testsuite} from '../../main/model/Testsuite'
 import fs from 'fs'
-import {RESOURCE_PATH} from '../../build/test/util'
+import {RESOURCE_PATH} from '../../../build/test/util'
+import {MapperService} from '../../main/mappers/MapperService'
 
 
 describe('Integration Tests', () => {
     const config = TestFiles.getInstance()
+    const mapperService = new MapperService()
 
     it('surefire+pmd with valid files (complete file)', async () => {
         config.setAllValid()
-        const xmlResult = await mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
+        const xmlResult = await mapperService.mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
         const fileContent = fs.readFileSync(RESOURCE_PATH + 'results/unified-valid-surefire-pmd.xml', 'utf8')
 
         expect(xmlResult, 'Blackbox test.').to.be.equal(fileContent)
@@ -23,7 +24,7 @@ describe('Integration Tests', () => {
 
     it('surefire+pmd with valid files', async () => {
         config.setAllValid()
-        const xmlResult = await mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
+        const xmlResult = await mapperService.mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
 
         // read result
         const result = JSON.parse(parser.toJson(xmlResult))
@@ -47,7 +48,7 @@ describe('Integration Tests', () => {
         config.setAllValid()
         config.setPmdFile('invalid.xml')
 
-        const xmlResult = await mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
+        const xmlResult = await mapperService.mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
         // read result
         const result = JSON.parse(parser.toJson(xmlResult))
         expect(result).to.be.an('object')
@@ -71,7 +72,7 @@ describe('Integration Tests', () => {
         config.setAllValid()
         config.setSurefireFile('invalid.xml')
 
-        const xmlResult = await mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
+        const xmlResult = await mapperService.mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
 
         // read result
         const result = JSON.parse(parser.toJson(xmlResult))
@@ -92,7 +93,7 @@ describe('Integration Tests', () => {
         config.setSurefireFile('invalid.xml')
         config.setPmdFile('invalid.xml')
 
-        const xmlResult = await mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
+        const xmlResult = await mapperService.mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
 
         // read result
         const result = JSON.parse(parser.toJson(xmlResult))
@@ -115,10 +116,11 @@ describe('Integration Tests', () => {
 
 describe('Component Flags', () => {
     const config = TestFiles.getInstance()
+    const mapperService = new MapperService()
 
     it('only PMD', async () => {
         config.setAllValid()
-        const xmlResult = await mapToUnifiedXml([PMD_FLAG], config)
+        const xmlResult = await mapperService.mapToUnifiedXml([PMD_FLAG], config)
 
         // read result
         const result = JSON.parse(parser.toJson(xmlResult))
@@ -134,7 +136,7 @@ describe('Component Flags', () => {
 
     it('only Surefire', async () => {
         config.setAllValid()
-        const xmlResult = await mapToUnifiedXml([SUREFIRE_FLAG], config)
+        const xmlResult = await mapperService.mapToUnifiedXml([SUREFIRE_FLAG], config)
 
         // read result
         const result = JSON.parse(parser.toJson(xmlResult))
