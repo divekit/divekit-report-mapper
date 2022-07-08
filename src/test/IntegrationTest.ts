@@ -6,10 +6,20 @@ import {PMD_FLAG} from '../main/const/PMDConstants'
 import {mapToUnifiedXml} from '../main'
 import parser from 'xml2json'
 import {Testsuite} from '../main/model/Testsuite'
+import fs from 'fs'
+import {RESOURCE_PATH} from './util'
 
 
 describe('Integration Tests', () => {
     const config = TestFileConfig.getInstance()
+
+    it('surefire+pmd with valid files (complete file)', async () => {
+        config.setAllValid()
+        const xmlResult = await mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
+        const fileContent = fs.readFileSync(RESOURCE_PATH + 'results/unified-valid-surefire-pmd.xml', 'utf8')
+
+        expect(xmlResult, 'Blackbox test.').to.be.equal(fileContent)
+    })
 
     it('surefire+pmd with valid files', async () => {
         config.setAllValid()
