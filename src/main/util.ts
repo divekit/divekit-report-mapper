@@ -7,16 +7,16 @@ export function ensureArray(object: any | any[]): any[] {
 }
 
 /**
- * Try to parse the content of a given file to json.
- * @param path path to a json file
+ * Try to parse a xml-string to json.
+ * @param xml path to json
  * @return parsed json or undefined if an exception is thrown while parsing
  */
-export function parseJsonFile(path: string): any | undefined {
+export function parseXMLToJson(xml: string): any | undefined {
     let json
     try {
-        json = JSON.parse(parser.toJson(path))
+        json = JSON.parse(parser.toJson(xml))
     } catch (e) {
-        logger.error('Could NOT parse ' + path)
+        logger.error('Could NOT parse ' + xml)
     }
     return json
 }

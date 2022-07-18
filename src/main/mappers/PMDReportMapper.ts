@@ -5,32 +5,21 @@ import {Testsuite} from '../model/Testsuite'
 import {Testcase} from '../model/Testcase'
 import parser from 'xml2json'
 import {Error} from '../model/Error'
-import {CLEAN_CODE_PRINCIPLES, STATUS, SUITE_TYPE} from '../const/CoreConstants'
-import {CLEAN_CODE_PRINCIPLES_PMD_RULES} from '../const/PmdConstants'
+import {STATUS, SUITE_TYPE} from '../const/CoreConstants'
 import {logger} from '../config/Logger'
 import {ensureArray} from '../util'
+import {PMDPrinciples} from '../config/PMDPrinciples'
 
 const xmlEscape = require('xml-escape')
 
 export class PMDReportMapper implements ReportMapper {
+    private pmdPrinciples = PMDPrinciples.getInstance()
     suites: SuiteCollection
     input: any[]
 
     constructor() {
         this.suites = new SuiteCollection()
         this.input = []
-    }
-
-    /**
-     * TODO filter principles according to current ruleset
-     */
-    private static filteredPrinciples(): string[] {
-        return CLEAN_CODE_PRINCIPLES
-    }
-
-    // TODO filter principles according to current ruleset
-    private static filteredPMDPrinciples(): { [key: string]: string[] } {
-        return CLEAN_CODE_PRINCIPLES_PMD_RULES
     }
 
     public name(): string {
@@ -48,6 +37,10 @@ export class PMDReportMapper implements ReportMapper {
         })
     }
 
+    getXml(): string {
+        return parser.toXml(JSON.stringify(this.suites))
+    }
+
     /**
      * map all inputs to a SuiteCollection
      */
@@ -56,7 +49,7 @@ export class PMDReportMapper implements ReportMapper {
             let pmd
             try {
                 const json = JSON.parse(parser.toJson(file))
-                pmd = json.pmd // TODO define model?
+                pmd = json.pmd
             } catch (e) {
                 console.log('Error while parsing pmd.xml: ' + e)
                 return
@@ -83,7 +76,7 @@ export class PMDReportMapper implements ReportMapper {
             return testsuite
         }
 
-        for (const principle of PMDReportMapper.filteredPrinciples()) {
+        for (const principle of this.pmdPrinciples.getCleanCodePrinciples()) {
             const testcase = this.generateTestcase(principle, pmdResults)
 
             if (testcase.status === STATUS.FAILED) testsuite.status = STATUS.FAILED
@@ -119,7 +112,7 @@ export class PMDReportMapper implements ReportMapper {
         const errors: Error[] = []
         list.forEach((violation: any) => {
             const rule = violation.rule // in format e.g. "LongVariable"
-            const pmdPrinciples = PMDReportMapper.filteredPMDPrinciples()[principle]
+            const pmdPrinciples = this.pmdPrinciples.getCleanCodePrinciplesPmdRules()[principle]
 
             if (pmdPrinciples && pmdPrinciples.includes(rule)) {
                 errors.push(this.createError(violation, rule, fileName))
@@ -157,9 +150,5 @@ export class PMDReportMapper implements ReportMapper {
         newError.type = source
 
         return newError
-    }
-
-    getXml(): string {
-        return parser.toXml(JSON.stringify(this.suites))
     }
 }

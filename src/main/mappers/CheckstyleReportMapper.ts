@@ -5,7 +5,7 @@ import parser from 'xml2json'
 import {Testsuite} from '../model/Testsuite'
 import {Testcase} from '../model/Testcase'
 import {Error} from '../model/Error'
-import {CLEAN_CODE_PRINCIPLES, STATUS, SUITE_TYPE} from '../const/CoreConstants'
+import {CODE_PRINCIPLES, STATUS, SUITE_TYPE} from '../const/CoreConstants'
 import {CLEAN_CODE_PRINCIPLES_CHECKSTYLE_CHECKS} from '../const/CheckstyleConstants'
 
 export class CheckstyleReportMapper implements ReportMapper {
@@ -41,7 +41,7 @@ export class CheckstyleReportMapper implements ReportMapper {
         testsuite.name = 'Clean-Code-Principles by Checkstyle'
         testsuite.type = SUITE_TYPE.CLEAN_CODE
 
-        for (const principle of CLEAN_CODE_PRINCIPLES) {
+        for (const principle of CODE_PRINCIPLES) {
             const testcase = new Testcase()
             testcase.name = principle
 

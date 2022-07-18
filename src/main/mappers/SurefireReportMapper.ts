@@ -3,7 +3,7 @@ import parser from 'xml2json'
 import {SuiteCollection} from '../model/SuiteCollection'
 import {ReportMapper} from './interface/ReportMapper'
 import {STATUS, SUITE_TYPE} from '../const/CoreConstants'
-import {ensureArray, parseJsonFile} from '../util'
+import {ensureArray, parseXMLToJson} from '../util'
 
 export class SurefireReportMapper implements ReportMapper {
     suites: SuiteCollection = new SuiteCollection()
@@ -32,7 +32,7 @@ export class SurefireReportMapper implements ReportMapper {
 
     mapToUnified(): void {
         this.input.forEach(file => {
-            const json = parseJsonFile(file)
+            const json = parseXMLToJson(file)
             if (!json || !json.testsuite) {
                 this.errorOccurred = true
                 return
