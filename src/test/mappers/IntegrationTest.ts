@@ -18,7 +18,11 @@ describe('Integration Tests', () => {
         const xmlResult = await mapperService.mapToUnifiedXml([SUREFIRE_FLAG, PMD_FLAG], config)
         const fileContent = fs.readFileSync(TestFiles.VALID_SUREFIRE_PMD_RESULT, 'utf8')
 
-        expect(xmlResult, 'Blackbox test.').to.be.equal(fileContent)
+        // ignore line separators
+        const updatedResult = xmlResult.replaceAll("\n", "").replaceAll("\r", "")
+        const updatedContent = fileContent.replaceAll("\n", "").replaceAll("\r", "")
+
+        expect(updatedResult, 'Blackbox test.').to.be.equal(updatedContent)
     })
 
     it('surefire+pmd with valid files', async () => {
