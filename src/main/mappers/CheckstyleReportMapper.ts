@@ -84,10 +84,8 @@ export class CheckstyleReportMapper implements ReportMapper {
         newError.file = fileName
 
         let location = ''
-        // tslint:disable-next-line:no-unused-expression
-        error.line ? location = location.concat('Line: ' + error.line + ' ') : ''
-        // tslint:disable-next-line:no-unused-expression
-        error.column ? location = location.concat('Column: ' + error.column) : ''
+        location = error.line ? location.concat('Line: ' + error.line + ' ') : ''
+        location = error.column ? location.concat('Column: ' + error.column) : ''
 
         newError.location = location
         newError.message = error.message

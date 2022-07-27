@@ -13,9 +13,10 @@ import {PMDPrinciples} from '../config/PMDPrinciples'
 const xmlEscape = require('xml-escape')
 
 export class PMDReportMapper implements ReportMapper {
-    private pmdPrinciples = PMDPrinciples.getInstance()
     suites: SuiteCollection
     input: any[]
+
+    private pmdPrinciples = PMDPrinciples.getInstance()
 
     constructor() {
         this.suites = new SuiteCollection()

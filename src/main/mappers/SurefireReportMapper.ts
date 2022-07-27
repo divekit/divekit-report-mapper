@@ -51,8 +51,7 @@ export class SurefireReportMapper implements ReportMapper {
         testsuite.name = nameSplit[nameSplit.length - 1]
         testsuite.testcase = ensureArray(testsuite.testcase)
 
-        // tslint:disable-next-line:radix
-        testsuite.status = parseInt(testsuite.failures) || parseInt(testsuite.errors) > 0 ? STATUS.FAILED : STATUS.PASSED
+        testsuite.status = parseInt(testsuite.failures, 10) || parseInt(testsuite.errors, 10) > 0 ? STATUS.FAILED : STATUS.PASSED
         testsuite.tests = undefined
         testsuite.skipped = undefined
         testsuite.errors = undefined

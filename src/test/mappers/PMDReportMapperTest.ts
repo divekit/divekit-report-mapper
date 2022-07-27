@@ -1,4 +1,3 @@
-/* tslint:disable */
 import {expect} from 'chai'
 import {PMDReportMapper} from '../../main/mappers/PMDReportMapper'
 import parser from 'xml2json'

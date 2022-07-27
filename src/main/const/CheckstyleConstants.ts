@@ -14,9 +14,9 @@ export const CHECKSTYLE_NAME_CHECKS = ['MethodNameCheck', 'MethodTypeParameterNa
     'LocalVariableName', 'MemberNameCheck', 'MethodNameCheck', 'PackageNameCheck', 'ParameterNameCheck',
     'StaticVariableName', 'TypeNameCheck']
 
-export const CHECKSTYLE_COMMENT_CHECKS = ['InvalidJavadocPositionCheck', 'JavadocBlockTagLocationCheck', 'JavadocMissingLeadingAsteriskCheck',
-    'JavadocMissingLeadingAsteriskCheck', 'JavadocStyleCheck', 'JavadocTypeCheck', 'MissingJavadocMethodCheck', 'SummaryJavadocCheck',
-    'MissingJavadocTypeCheck', 'TrailingCommentCheck']
+export const CHECKSTYLE_COMMENT_CHECKS = ['InvalidJavadocPositionCheck', 'JavadocBlockTagLocationCheck',
+    'JavadocMissingLeadingAsteriskCheck', 'JavadocMissingLeadingAsteriskCheck', 'JavadocStyleCheck', 'JavadocTypeCheck',
+    'MissingJavadocMethodCheck', 'SummaryJavadocCheck', 'MissingJavadocTypeCheck', 'TrailingCommentCheck']
 
 export const CHECKSTYLE_YAGNI_CHECKS = ['EmptyBlockCheck', 'UnusedImports']
 

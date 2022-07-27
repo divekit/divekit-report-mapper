@@ -12,7 +12,7 @@ export class Error {
 
     /**
      * directly JSON.stringify [Error]-Objects transform into the following JSON-Struktur
-     *  ```
+     * ```
      *  error: [
      *      Error {
      *        type: 'string',
@@ -22,7 +22,7 @@ export class Error {
      *        '$t': 'string'
      *      }
      *  ]
-     *  ```
+     * ```
      * Wich is not parsed correctly into xml. The [Error]-Class-type should not be specified.
      *
      * WARNING: This implementation is very likely not ideal.

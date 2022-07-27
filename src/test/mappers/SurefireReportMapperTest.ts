@@ -1,4 +1,3 @@
-/* tslint:disable */
 import {wrapWithUnifiedXml} from '../util'
 import {expect} from 'chai'
 import {SurefireReportMapper} from '../../main/mappers/SurefireReportMapper'

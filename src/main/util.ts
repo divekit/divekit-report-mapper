@@ -1,7 +1,7 @@
 import parser from 'xml2json'
 import {logger} from './config/Logger'
 
-export function ensureArray(object: any | any[]): any[] {
+export const ensureArray = (object: any | any[]): any[] => {
     if (!object.length) return [object]
     return object
 }
@@ -11,7 +11,7 @@ export function ensureArray(object: any | any[]): any[] {
  * @param xml path to json
  * @return parsed json or undefined if an exception is thrown while parsing
  */
-export function parseXMLToJson(xml: string): any | undefined {
+export const parseXMLToJson = (xml: string): any | undefined => {
     let json
     try {
         json = JSON.parse(parser.toJson(xml))

@@ -8,6 +8,7 @@ export class Testcase {
     failure: Error[]
     file: string | undefined
     type: string | undefined
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     'system-out': string | undefined
 
     constructor(name: string = '') {

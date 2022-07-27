@@ -1,4 +1,3 @@
-/* tslint:disable */
 import {expect} from 'chai'
 import {TestFiles} from '../config/TestFilePaths'
 import {SUREFIRE_FLAG} from '../../main/const/SurefireConstants'

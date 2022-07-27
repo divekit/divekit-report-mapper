@@ -5,7 +5,7 @@ import {logger} from './Logger'
 
 export class PMDPrinciples {
     private static instance: PMDPrinciples
-    private static PMD_FILE_PATH = 'pmd-ruleset.xml'
+    private static pmdFilePath = 'pmd-ruleset.xml'
     private codePrinciples: string[] = []
     private codePrinciplesPMDRules: { [key: string]: string[] } = {}
     private configuredPMDRules: string[] = []
@@ -18,6 +18,14 @@ export class PMDPrinciples {
     public static getInstance(): PMDPrinciples {
         if (!this.instance) PMDPrinciples.instance = new PMDPrinciples()
         return this.instance
+    }
+
+    public getCleanCodePrinciples(): string[] {
+        return this.codePrinciples
+    }
+
+    public getCleanCodePrinciplesPmdRules(): { [key: string]: string[] } {
+        return this.codePrinciplesPMDRules
     }
 
     private loadConfig() {
@@ -36,8 +44,8 @@ export class PMDPrinciples {
         }
     }
 
-    private loadConfiguredPMDRules() {
-        const content = fs.readFileSync(PMDPrinciples.PMD_FILE_PATH, 'utf8')
+    private loadConfiguredPMDRules(): string[] {
+        const content = fs.readFileSync(PMDPrinciples.pmdFilePath, 'utf8')
         const json = parseXMLToJson(content)
         if (!json) logger.error('Could NOT parse PMD-Ruleset')
 
@@ -46,13 +54,5 @@ export class PMDPrinciples {
             const split = it.split('/')
             return split[split.length - 1]
         })
-    }
-
-    public getCleanCodePrinciples(): string[] {
-        return this.codePrinciples
-    }
-
-    public getCleanCodePrinciplesPmdRules(): { [key: string]: string[] } {
-        return this.codePrinciplesPMDRules
     }
 }

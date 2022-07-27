@@ -5,9 +5,9 @@ export const PMD_FLAG = 'pmd'
 
 // PMD Rules
 export const PMD_KISS_RULES = ['ForLoopVariableCount', 'ForLoopCanBeForeach', 'SimplifiableTestAssertion', 'WhileLoopWithLiteralBoolean',
-    'ForLoopShouldBeWhileLoop', 'UnnecessaryLocalBeforeReturn', 'UseShortArrayInitializer', 'AvoidDeeplyNestedIfStmts', 'AvoidRethrowingException',
-    'CognitiveComplexity', 'CollapsibleIfStatements', 'CyclomaticComplexity', 'ExcessiveParameterList', 'LogicInversion', 'NcssCount',
-    'NPathComplexity', 'SimplifyBooleanExpressions', 'TooFewBranchesForASwitchStatement']
+    'ForLoopShouldBeWhileLoop', 'UnnecessaryLocalBeforeReturn', 'UseShortArrayInitializer', 'AvoidDeeplyNestedIfStmts',
+    'AvoidRethrowingException', 'CognitiveComplexity', 'CollapsibleIfStatements', 'CyclomaticComplexity', 'ExcessiveParameterList',
+    'LogicInversion', 'NcssCount', 'NPathComplexity', 'SimplifyBooleanExpressions', 'TooFewBranchesForASwitchStatement']
 export const PMD_NAME_RULES = ['AvoidDollarSigns', 'ClassNamingConventions', 'FieldNamingConventions', 'FormalParameterNamingConventions',
     'GenericsNaming', 'LinguisticNaming', 'LocalVariableNamingConventions', 'LongVariable', 'MethodNamingConventions', 'ShortMethodName',
     'ShortVariable']
