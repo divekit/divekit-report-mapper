@@ -24,12 +24,10 @@ jobs:
           script: core.setFailed('Version must not include beta tag!')
       - name: Build package
         run: npm ci
-      - name: install tsc
-        run: npm install tsc
-      - name: compile to js
-        run: tsc
       - name: Run tests
         run: npm test
+      - name: compile
+        run: npx tsc
       - name: Publish to npm
         id: publish
         uses: JS-DevTools/npm-publish@v1
