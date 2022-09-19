@@ -1,4 +1,4 @@
-import {CLEAN_CODE_PRINCIPLES_PMD_RULES} from '../const/PMDConstants'
+import {CLEAN_CODE_PRINCIPLES_PMD_RULES} from '../const/PmdConstants'
 import fs from 'fs'
 import {parseXMLToJson} from '../util'
 import {logger} from './Logger'
