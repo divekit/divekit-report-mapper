@@ -1,12 +1,16 @@
 {
   "name": "@divekit/report-mapper",
-  "version": "1.1.2-beta.0",
+  "version": "1.1.2-beta.1",
   "main": "build/main/index.js",
   "types": "build/main/index.d.ts",
   "prepublish": "tsc",
   "bin": {
+    "@divekit/report-mapper": "build/main/bin/report-mapper.js",
     "report-mapper": "build/main/bin/report-mapper.js"
   },
+  "files": [
+    "build"
+  ],
   "publishConfig": {
     "access": "public"
   },
