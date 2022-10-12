@@ -4,7 +4,6 @@ import {PMD_FLAG} from './const/PmdConstants'
 import {logger} from './config/Logger'
 import {MapperService} from './mappers/MapperService'
 
-
 export async function main() {
     const args: string[] = process.argv.slice(2) // remove node + script-path arguments
 
@@ -14,7 +13,7 @@ export async function main() {
 
     const mapperService = new MapperService()
     const xml = await mapperService.mapToUnifiedXml(args)
+    
+    if (!fs.existsSync('target')) fs.mkdirSync('target', 0o744)
     fs.writeFileSync('target/unified.xml', xml)
 }
-
-
