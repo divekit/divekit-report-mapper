@@ -14,6 +14,6 @@ export async function main() {
     const mapperService = new MapperService()
     const xml = await mapperService.mapToUnifiedXml(args)
     
-    if (!path.existsSync('target')) fs.mkdirSync('target', 0744)
+    if (!fs.existsSync('target')) fs.mkdirSync('target', 0744)
     fs.writeFileSync('target/unified.xml', xml)
 }
